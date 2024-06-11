@@ -13,7 +13,7 @@ class MemberManager(BaseManager):
         self.cloud_service_group = "SpaceONE"
         self.cloud_service_type = "Member"
         self.provider = "spaceone_company"
-        self.metadata_path = "spaceone_company/metadata/spaceone/member.yaml"
+        self.metadata_path = "metadata/spaceone/member.yaml"
 
     def collect_resources(self, options, secret_data, schema):
         try:
@@ -46,6 +46,7 @@ class MemberManager(BaseManager):
     def collect_cloud_service(self, options, secret_data, schema):
         member_connector = MemberConnector()
         spaceone_members = member_connector.list_members()
+        print(spaceone_members)
         for spaceone_member in spaceone_members["members_info"]:
             cloud_service = make_cloud_service(
                 name=spaceone_member["name"],
